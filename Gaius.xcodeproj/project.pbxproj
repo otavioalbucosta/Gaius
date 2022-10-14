@@ -20,6 +20,8 @@
 		290700EA28F5B928001D0DF9 /* GameCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290700E928F5B928001D0DF9 /* GameCollectionView.swift */; };
 		290700F128F5ED82001D0DF9 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290700F028F5ED82001D0DF9 /* Game.swift */; };
 		2909B42628F848B3005F077B /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2909B42528F848B3005F077B /* SearchViewController.swift */; };
+		2909B42C28F99022005F077B /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2909B42B28F99022005F077B /* API.swift */; };
+		2909B42E28F99632005F077B /* Cover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2909B42D28F99632005F077B /* Cover.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +59,8 @@
 		290700E928F5B928001D0DF9 /* GameCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCollectionView.swift; sourceTree = "<group>"; };
 		290700F028F5ED82001D0DF9 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		2909B42528F848B3005F077B /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		2909B42B28F99022005F077B /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		2909B42D28F99632005F077B /* Cover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cover.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +111,7 @@
 		290700B228F593DD001D0DF9 /* Gaius */ = {
 			isa = PBXGroup;
 			children = (
+				2909B42A28F99013005F077B /* Service */,
 				290700EF28F5ED6B001D0DF9 /* Model */,
 				290700EE28F5ED58001D0DF9 /* Controller */,
 				290700ED28F5ED48001D0DF9 /* ViewModel */,
@@ -167,8 +172,17 @@
 			isa = PBXGroup;
 			children = (
 				290700F028F5ED82001D0DF9 /* Game.swift */,
+				2909B42D28F99632005F077B /* Cover.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		2909B42A28F99013005F077B /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				2909B42B28F99022005F077B /* API.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -326,10 +340,12 @@
 				290700E828F5B398001D0DF9 /* GamesCollectionViewCell.swift in Sources */,
 				290700B828F593DE001D0DF9 /* ViewController.swift in Sources */,
 				290700F128F5ED82001D0DF9 /* Game.swift in Sources */,
+				2909B42E28F99632005F077B /* Cover.swift in Sources */,
 				2909B42628F848B3005F077B /* SearchViewController.swift in Sources */,
 				290700B428F593DE001D0DF9 /* AppDelegate.swift in Sources */,
 				290700B628F593DE001D0DF9 /* SceneDelegate.swift in Sources */,
 				290700EA28F5B928001D0DF9 /* GameCollectionView.swift in Sources */,
+				2909B42C28F99022005F077B /* API.swift in Sources */,
 				290700BE28F593DE001D0DF9 /* Gaius.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

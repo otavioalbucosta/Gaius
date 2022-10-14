@@ -7,13 +7,14 @@
 
 import Foundation
 
-struct Game {
+struct Game: Codable {
     var id: Int?
     var ageRatings: [Int]?
     var aggregatedRating: Double?
     var aggregatedRatingCount: Int?
     var alternativeNames, artworks, bundles: [Int]?
-    var category, collection, cover, createdAt: Int?
+    var category, collection, createdAt: Int?
+    var cover: Cover?
     var dlcs, externalGames: [Int]?
     var firstReleaseDate, follows: Int?
     var franchises, gameEngines, gameModes, genres: [Int]?

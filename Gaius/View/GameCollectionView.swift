@@ -21,7 +21,7 @@ class GameCollectionView: UICollectionView {
     private let layout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.itemSize = CGSize(width: UIScreen.main.bounds.width - 20, height: 150)
+        layout.itemSize = CGSize(width: UIScreen.main.bounds.width - 20, height: 180)
 //        layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         return layout
     }()

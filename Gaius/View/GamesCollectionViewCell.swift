@@ -9,20 +9,23 @@ import UIKit
 import Foundation
 
 class GamesCollectionViewCell: UICollectionViewCell {
-
     static let CellID = "GamesCellID"
-
     let isOnSearch: Bool = true
 
-    var gameCover: String?
+    var gameCover: String? {
+
+        didSet {
+            Task {
+                await self.coverImage.load(URL: URL(string: gameCover!)!)
+            }
+        }
+
+    }
 
     let coverImage: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
-//        image.image = UIImage(named: "cover")
-                 if let url = URL(string: "https://images.igdb.com/igdb/image/upload/t_thumb/co2mlg.jpg"){
-                     image.load(URL:url)
-                 }
+        //        image.image = UIImage(named: "cover")
         return image
     }()
 
@@ -32,15 +35,16 @@ class GamesCollectionViewCell: UICollectionViewCell {
         text.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         text.numberOfLines = 3
         text.lineBreakMode = .byWordWrapping
-        text.textColor = .black
+        text.textAlignment = .center
+        text.textColor = UIColor(named: "labelColor")
         return text
     }()
-    
     let age: UILabel = {
         let age = UILabel()
         age.translatesAutoresizingMaskIntoConstraints = false
-        age.font = UIFont.systemFont(ofSize: 10)
-        age.textColor = .darkGray
+        age.font = UIFont.systemFont(ofSize: 15, weight: .light)
+        age.textColor = UIColor(named: "labelColor")
+        age.textAlignment = .center
         return age
     }()
 
@@ -50,11 +54,10 @@ class GamesCollectionViewCell: UICollectionViewCell {
         addSubview(title)
         if isOnSearch {
             addSubview(age)
+
         }
         setupViews()
     }
-
-
     override func layoutSubviews() {
         backgroundColor = .systemBackground
     }
@@ -62,7 +65,6 @@ class GamesCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
     func setupViews() {
         if isOnSearch {
             NSLayoutConstraint.activate([
@@ -70,47 +72,44 @@ class GamesCollectionViewCell: UICollectionViewCell {
                 coverImage.leadingAnchor.constraint(equalTo: self.leadingAnchor),
                 coverImage.trailingAnchor.constraint(equalTo: coverImage.trailingAnchor),
                 coverImage.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-                coverImage.widthAnchor.constraint(equalToConstant: 120),
-                title.topAnchor.constraint(equalTo: isOnSearch ?
-                                           self.topAnchor : coverImage.bottomAnchor, constant: isOnSearch ? 0 : 10),
-                title.leadingAnchor.constraint(equalTo: isOnSearch ?
-                                               coverImage.trailingAnchor :
-                                                self.leadingAnchor, constant: isOnSearch ? 10 : 0),
+                coverImage.widthAnchor.constraint(equalToConstant: 140),
+                title.topAnchor.constraint(equalTo: self.topAnchor, constant: 20),
+                title.leadingAnchor.constraint(equalTo: coverImage.trailingAnchor, constant: 10),
                 title.trailingAnchor.constraint(equalTo: self.trailingAnchor),
                 age.topAnchor.constraint(equalTo: title.bottomAnchor),
-                age.leadingAnchor.constraint(equalTo: coverImage.trailingAnchor),
-                age.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-                age.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+                age.leadingAnchor.constraint(equalTo: coverImage.trailingAnchor, constant: 10),
+                age.trailingAnchor.constraint(equalTo: self.trailingAnchor)
             ])
         } else {
             NSLayoutConstraint.activate([
                 coverImage.topAnchor.constraint(equalTo: self.topAnchor),
-                coverImage.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+                coverImage.leadingAnchor.constraint(equalTo: coverImage.leadingAnchor),
+                coverImage.centerXAnchor.constraint(equalTo: self.centerXAnchor),
                 coverImage.trailingAnchor.constraint(equalTo: coverImage.trailingAnchor),
-                coverImage.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+                coverImage.bottomAnchor.constraint(equalTo: coverImage.bottomAnchor),
+                coverImage.heightAnchor.constraint(equalToConstant: 150),
                 coverImage.widthAnchor.constraint(equalToConstant: 120),
-                title.topAnchor.constraint(equalTo: isOnSearch ?
-                                           self.topAnchor : coverImage.bottomAnchor, constant: isOnSearch ? 0 : 10),
-                title.leadingAnchor.constraint(equalTo: isOnSearch ?
-                                               coverImage.trailingAnchor :
-                                                self.leadingAnchor, constant: isOnSearch ? 10 : 0),
-                title.trailingAnchor.constraint(equalTo: self.trailingAnchor)
+
+                title.topAnchor.constraint(equalTo: coverImage.bottomAnchor, constant: 10),
+                title.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+                title.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+                title.centerXAnchor.constraint(equalTo: self.centerXAnchor)
             ])
         }
     }
-
 }
 
 extension UIImageView {
-    func load(URL: URL) {
-        Task {
-            if let data = try? Data(contentsOf: URL) {
-                if let image = UIImage(data: data) {
-                    DispatchQueue.main.async {
-                        self.image = image
-                    }
+    func load(URL: URL) async {
+        do {
+            let (data, _) = try await URLSession.shared.data(from: URL)
+            if let image = UIImage(data: data) {
+                DispatchQueue.main.async {
+                    self.image = image
                 }
             }
+        } catch {
+            print(error)
         }
     }
 }
