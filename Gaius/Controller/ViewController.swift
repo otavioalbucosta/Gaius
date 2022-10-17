@@ -9,18 +9,21 @@ import UIKit
 
 // ChildViewController
 
-class ViewController: UIViewController, UISearchResultsUpdating, UICollectionViewDataSource, UICollectionViewDelegate {
-    
+class ViewController: UIViewController, UISearchResultsUpdating, UICollectionViewDataSource,
+                        UICollectionViewDelegate, UISearchControllerDelegate {
+
     let searchBar = SearchViewController()
     let gameCollection = GameCollectionView()
     var source = [Game]()
     var searchSource = [Game]()
-    
+    var searchTimer: Timer?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         navigationItem.title = "Gaming search"
         searchBar.searchResultsUpdater = self
+        searchBar.delegate = self
         navigationItem.searchController = searchBar
         view.addSubview(gameCollection)
         gameCollection.dataSource = self
@@ -34,7 +37,7 @@ class ViewController: UIViewController, UISearchResultsUpdating, UICollectionVie
             //            print(res)
         }
         // Do any additional setup after loading the view.
-        
+
     }
     func setupView() {
         gameCollection.translatesAutoresizingMaskIntoConstraints = false
@@ -45,11 +48,11 @@ class ViewController: UIViewController, UISearchResultsUpdating, UICollectionVie
             gameCollection.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return source.count
     }
-    
+
     func collectionView(
         _ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
             if let cell = gameCollection.dequeueReusableCell(
@@ -66,38 +69,43 @@ class ViewController: UIViewController, UISearchResultsUpdating, UICollectionVie
                 if let name = source[indexPath.row].name {
                     cell.title.text = name
                 }
-                
+
                 if let timestamp = source[indexPath.row].firstReleaseDate {
                     let date = Date(timeIntervalSince1970: Double(timestamp)).formatted()
                     cell.age.text = date
                 } else {
                     cell.age.text = "To Be Released"
                 }
-                
+
                 return cell
             }
             let cell = UICollectionViewCell()
             cell.backgroundColor = .black
             return cell
         }
-    
+
     func updateSearchResults(for searchController: UISearchController) {
-        guard let query = searchController.searchBar.text else {
-            Task{
-                let res = await API.getGamesByPopularity(limit: 50, token: "menf7x6bad06mm51uhwpr8i2fjs1uf")
+        self.searchTimer?.invalidate()
+        guard let query = searchController.searchBar.text else { return }
+        searchTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { [weak self] _ in
+            Task {
+                let res = await API.searchGamesByName(limit: 50, token: "menf7x6bad06mm51uhwpr8i2fjs1uf", search: query)
+                self!.source = res
+                DispatchQueue.main.async {
+                    self!.gameCollection.reloadData()
+                }
             }
-            return
-        }
+        })
+    }
+
+    func didDismissSearchController(_ searchController: UISearchController) {
         Task {
-            let res = await API.searchGamesByName(limit: 10,
-                                                  token: "menf7x6bad06mm51uhwpr8i2fjs1uf", search: query)
+            let res = await API.getGamesByPopularity(limit: 50, token: "menf7x6bad06mm51uhwpr8i2fjs1uf")
             source = res
-            print(res)
-            self.gameCollection.reloadData()
             DispatchQueue.main.async {
-                
+                self.gameCollection.reloadData()
             }
         }
     }
-    
+
 }

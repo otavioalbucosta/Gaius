@@ -51,13 +51,15 @@ struct API {
         ]
         let body = """
         fields *, cover.*;
-        search "\(search)";
+        where name ~ *"\(search)"* & category = (0,1,8,9,10) & version_parent = null & first_release_date != null & follows != null;
+        sort follows desc;
         limit \(limit);
         """
         requestHeader.httpBody = body.data(using: .utf8, allowLossyConversion: false)
         do {
-            let (data, _) = try await URLSession.shared.data(for: requestHeader)
+            let (data, result) = try await URLSession.shared.data(for: requestHeader)
             print(data)
+            print(result)
             let gameList = try decoder.decode([Game].self, from: data)
             return gameList
         } catch {
