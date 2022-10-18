@@ -51,8 +51,9 @@ class GamesCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(coverImage)
-        addSubview(title)
+
         if isOnSearch {
+            addSubview(title)
             addSubview(age)
 
         }
@@ -88,28 +89,8 @@ class GamesCollectionViewCell: UICollectionViewCell {
                 coverImage.trailingAnchor.constraint(equalTo: coverImage.trailingAnchor),
                 coverImage.bottomAnchor.constraint(equalTo: coverImage.bottomAnchor),
                 coverImage.heightAnchor.constraint(equalToConstant: 150),
-                coverImage.widthAnchor.constraint(equalToConstant: 120),
-
-                title.topAnchor.constraint(equalTo: coverImage.bottomAnchor, constant: 10),
-                title.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-                title.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-                title.centerXAnchor.constraint(equalTo: self.centerXAnchor)
+                coverImage.widthAnchor.constraint(equalToConstant: 120)
             ])
-        }
-    }
-}
-
-extension UIImageView {
-    func load(URL: URL) async {
-        do {
-            let (data, _) = try await URLSession.shared.data(from: URL)
-            if let image = UIImage(data: data) {
-                DispatchQueue.main.async {
-                    self.image = image
-                }
-            }
-        } catch {
-            print(error)
         }
     }
 }

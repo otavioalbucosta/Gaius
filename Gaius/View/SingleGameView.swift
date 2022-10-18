@@ -8,6 +8,8 @@
 import UIKit
 
 class SingleGameView: UIView {
+
+    var game: Game
     var rating: Int = 50 {
         didSet {
             if rating >= 70 {
@@ -27,20 +29,20 @@ class SingleGameView: UIView {
         if rating >= 70 {
             ratingUILabel.textColor = .green
             return "Great"
-            
+
         } else if rating < 40 && rating > 70 {
             ratingUILabel.textColor = .yellow
             return "Good"
-            
+
         } else {
             ratingUILabel.textColor = .red
             return "Bad" }
     }
 
-    private let gameCover: UIImageView = {
+    lazy var gameCover: UIImageView = {
         let gameCover = UIImageView()
         Task {
-           await gameCover.load(URL: URL(string: "https://images.igdb.com/igdb/image/upload/t_720p/co2ous.jpg")!)
+            await gameCover.load(URL: URL(string: "https://images.igdb.com/igdb/image/upload/t_720p/co2ous.jpg")!)
         }
         gameCover.layer.cornerRadius = 10
         gameCover.layer.masksToBounds = true
@@ -48,7 +50,7 @@ class SingleGameView: UIView {
         return gameCover
     }()
 
-    private let gameTitle: UILabel = {
+    lazy var gameTitle: UILabel = {
         let gameTitle = UILabel()
         gameTitle.translatesAutoresizingMaskIntoConstraints = false
         gameTitle.text = "Persona 5 Royal"
@@ -56,42 +58,34 @@ class SingleGameView: UIView {
         gameTitle.textAlignment = .center
         gameTitle.numberOfLines = 2
         gameTitle.lineBreakMode = .byWordWrapping
-        gameTitle.textColor = .red
+        gameTitle.textColor = .white
         return gameTitle
     }()
 
-    private let favoriteButtom: UIButton = {
+    lazy var favoriteButtom: UIButton = {
         let favoriteButtom = UIButton()
         favoriteButtom.translatesAutoresizingMaskIntoConstraints = false
-        favoriteButtom.backgroundColor = .green
-        favoriteButtom.titleLabel?.text = "Favorite"
+        favoriteButtom.backgroundColor = .systemGreen
+        favoriteButtom.setTitle("Add Favorite", for: .normal)
+        favoriteButtom.setImage(UIImage(systemName: "heart"), for: .normal)
+        favoriteButtom.setTitleColor(.black, for: .normal)
+        favoriteButtom.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        favoriteButtom.layer.cornerRadius = 10
         return favoriteButtom
     }()
 
-    private let genreLabel: UILabel = {
-        let genreLabel = UILabel()
-        genreLabel.translatesAutoresizingMaskIntoConstraints = false
-        return genreLabel
-    }()
-
-    private let platforms: UILabel = {
-        let platforms = UILabel()
-        platforms.translatesAutoresizingMaskIntoConstraints = false
-        return platforms
-    }()
-    private let screenshot: UIImageView = {
+    lazy var screenshot: UIImageView = {
         let screenshot = UIImageView()
         screenshot.translatesAutoresizingMaskIntoConstraints = false
         let blur = UIBlurEffect(style: UIBlurEffect.Style.dark)
         let blurView = UIVisualEffectView(effect: blur)
         blurView.frame = screenshot.bounds
         blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        screenshot.image = UIImage(named: "cover")
         screenshot.addSubview(blurView)
         return screenshot
     }()
 
-    private let criticRatings: UILabel = {
+    lazy var criticRatings: UILabel = {
         let criticRatings = UILabel()
         criticRatings.text = "98"
         criticRatings.textAlignment = .center
@@ -103,7 +97,7 @@ class SingleGameView: UIView {
         return criticRatings
     }()
 
-    private let ratingStack: UIStackView = {
+    lazy var ratingStack: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.axis = .vertical
@@ -116,23 +110,31 @@ class SingleGameView: UIView {
         return stack
 
     }()
-    private let ratingUILabel: UILabel = {
+
+    lazy var ratingUILabel: UILabel = {
         let ratingLabel = UILabel()
         ratingLabel.translatesAutoresizingMaskIntoConstraints = false
         ratingLabel.font = UIFont.systemFont(ofSize: 14, weight: .heavy)
         return ratingLabel
     }()
 
-    override init(frame: CGRect) {
+    lazy var collectionView: CollectionCollectionViewView = {
+        let collecView = CollectionCollectionViewView(frame: CGRect.zero,game: self.game)
+        collecView.translatesAutoresizingMaskIntoConstraints = false
+        return collecView
+    }()
+
+     init(frame: CGRect, game: Game) {
+        self.game = game
         super.init(frame: frame)
         addSubview(screenshot)
         addSubview(gameCover)
         addSubview(gameTitle)
-//        addSubview(favoriteButtom)
-        addSubview(genreLabel)
-        addSubview(platforms)
+        addSubview(favoriteButtom)
         addSubview(ratingStack)
+        addSubview(collectionView)
         addStackSubviews()
+        setupImages()
         setupView()
     }
     required init?(coder: NSCoder) {
@@ -147,6 +149,30 @@ class SingleGameView: UIView {
         ratingUILabel.text = ratingLabel
         ratingStack.addArrangedSubview(ratingUILabel)
 
+    }
+
+    func setupImages() {
+        if let cover = self.game.cover?.url {
+            var finalUrl = "https:" + cover
+            finalUrl = finalUrl.replacingOccurrences(of: "thumb", with: "720p")
+            Task {
+                await self.gameCover.load(URL: URL(string: finalUrl)!)
+            }
+
+        } else {
+            self.gameCover.image = UIImage(named: "cover")
+        }
+
+        if game.screenshots != nil && game.screenshots?.count != 0 {
+            let scrShot = game.screenshots?.randomElement()
+            var finalURL = "https:" + (scrShot?.url)!
+            finalURL = finalURL.replacingOccurrences(of: "thumb", with: "720p")
+            Task {
+                await self.screenshot.load(URL: URL(string: finalURL)!)
+            }
+        } else {
+            self.screenshot.image = UIImage(named: "cover")
+        }
     }
     func setupView() {
         NSLayoutConstraint.activate([
@@ -168,6 +194,23 @@ class SingleGameView: UIView {
             ratingStack.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -20),
             ratingStack.bottomAnchor.constraint(equalTo: ratingStack.bottomAnchor),
 
+            favoriteButtom.topAnchor.constraint(equalTo: gameCover.bottomAnchor, constant: 14),
+            favoriteButtom.leftAnchor.constraint(equalTo: gameCover.leftAnchor),
+            favoriteButtom.rightAnchor.constraint(equalTo: gameCover.rightAnchor),
+            favoriteButtom.bottomAnchor.constraint(equalTo: favoriteButtom.bottomAnchor),
+            favoriteButtom.heightAnchor.constraint(equalToConstant: 35),
+            
+            
+            collectionView.topAnchor.constraint(equalTo: ratingStack.bottomAnchor, constant: 10),
+            collectionView.bottomAnchor.constraint(equalTo: collectionView.bottomAnchor),
+            collectionView.leftAnchor.constraint(equalTo: self.leftAnchor),
+            collectionView.rightAnchor.constraint(equalTo: self.rightAnchor)
+//            genreCollectionStack.topAnchor.constraint(equalTo: ratingStack.bottomAnchor, constant: 10),
+//            genreCollectionStack.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 20),
+//            genreCollectionStack.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -20),
+//            genreCollectionStack.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+
         ])
     }
+
 }

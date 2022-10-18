@@ -8,13 +8,28 @@
 import UIKit
 
 class SingleGameViewController: UIViewController {
+    var game: Game
+    var contentView: SingleGameView
+    init(game: Game) {
+        self.game = game
+        self.contentView = SingleGameView(frame: CGRect.zero, game: game)
+        contentView.game = self.game
+        super.init(nibName: nil, bundle: nil)
+
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     let scrollView = UIScrollView()
-    let contentView = SingleGameView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         view.backgroundColor = .white
+        self.navigationController?.navigationBar.isTranslucent = true
+
         // Do any additional setup after loading the view.
     }
     func setupView() {
@@ -30,7 +45,7 @@ class SingleGameViewController: UIViewController {
 
             contentView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            contentView.topAnchor.constraint(equalTo: view.topAnchor),
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
 
         ])

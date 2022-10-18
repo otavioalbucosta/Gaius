@@ -17,13 +17,17 @@ struct Game: Codable {
     var cover: Cover?
     var dlcs, externalGames: [Int]?
     var firstReleaseDate, follows: Int?
-    var franchises, gameEngines, gameModes, genres: [Int]?
+    var franchises, gameEngines, gameModes: [Int]?
+    var genres: [Genre]
     var involvedCompanies, keywords: [Int]?
     var name: String?
-    var platforms, playerPerspectives: [Int]?
+    var playerPerspectives: [Int]?
+    var platforms: [Platforms]
     var rating: Double?
     var ratingCount: Int?
-    var releaseDates, screenshots, similarGames: [Int]?
+    var releaseDates: [Int]?
+//    var similarGames: [Game]?
+    var screenshots: [Screenshot]?
     var slug, storyline, summary: String?
     var tags, themes: [Int]?
     var totalRating: Double?

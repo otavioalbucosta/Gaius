@@ -13,7 +13,7 @@ class ViewController: UIViewController, UISearchResultsUpdating, UICollectionVie
                         UICollectionViewDelegate, UISearchControllerDelegate {
 
     let searchBar = SearchViewController()
-    let gameCollection = GameCollectionView()
+    let gameCollection = SearchGameCollectionView()
     var source = [Game]()
     var searchSource = [Game]()
     var searchTimer: Timer?
@@ -83,6 +83,10 @@ class ViewController: UIViewController, UISearchResultsUpdating, UICollectionVie
             cell.backgroundColor = .black
             return cell
         }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let singleGameVC = SingleGameViewController(game: source[indexPath.row])
+        self.show(singleGameVC, sender: self)
+    }
 
     func updateSearchResults(for searchController: UISearchController) {
         self.searchTimer?.invalidate()

@@ -22,8 +22,8 @@ struct API {
             "Content-Type": "text/plain"
         ]
         let body = """
-        fields *, cover.*;
-        where follows != null;
+        fields *, cover.*, screenshots.*, genres.*, similar_games.*, similar_games.genres.*, similar_games.cover.*, similar_games.screenshots.*, platforms.*;
+        where follows != null & category = (0,1,8,9,10) & version_parent = null & first_release_date != null;
         sort follows desc;
         limit \(limit);
         """
@@ -50,7 +50,7 @@ struct API {
             "Content-Type": "text/plain"
         ]
         let body = """
-        fields *, cover.*;
+        fields *, cover.*, screenshots.*, genres.*, similar_games.*, similar_games.genres.*, similar_games.cover.*, similar_games.screenshots.*, platforms.*;
         where name ~ *"\(search)"* & category = (0,1,8,9,10) & version_parent = null & first_release_date != null & follows != null;
         sort follows desc;
         limit \(limit);

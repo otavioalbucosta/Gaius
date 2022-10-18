@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GameCollectionView: UICollectionView {
+class SearchGameCollectionView: UICollectionView {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
