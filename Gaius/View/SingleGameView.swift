@@ -10,40 +10,29 @@ import UIKit
 class SingleGameView: UIView {
 
     var game: Game
-    var rating: Int = 50 {
-        didSet {
-            if rating >= 70 {
-                criticRatings.backgroundColor = .green
-                ratingUILabel.textColor = .green
-            } else if rating > 40 && rating < 70 {
-                criticRatings.backgroundColor = .systemYellow
-
-            } else {
-                criticRatings.backgroundColor = .red
-
-            }
-        }
-    }
+    var rating: Int
 
     var ratingLabel: String {
         if rating >= 70 {
             ratingUILabel.textColor = .green
             return "Great"
 
-        } else if rating < 40 && rating > 70 {
+        } else if rating >= 40 && rating < 70 {
             ratingUILabel.textColor = .yellow
             return "Good"
 
-        } else {
+        }else if rating < 40 && rating > 0{
             ratingUILabel.textColor = .red
-            return "Bad" }
+            return "Bad"
+        }
+        
+        else {
+            ratingUILabel.textColor = .gray
+            return "" }
     }
 
     lazy var gameCover: UIImageView = {
         let gameCover = UIImageView()
-        Task {
-            await gameCover.load(URL: URL(string: "https://images.igdb.com/igdb/image/upload/t_720p/co2ous.jpg")!)
-        }
         gameCover.layer.cornerRadius = 10
         gameCover.layer.masksToBounds = true
         gameCover.translatesAutoresizingMaskIntoConstraints = false
@@ -53,7 +42,6 @@ class SingleGameView: UIView {
     lazy var gameTitle: UILabel = {
         let gameTitle = UILabel()
         gameTitle.translatesAutoresizingMaskIntoConstraints = false
-        gameTitle.text = "Persona 5 Royal"
         gameTitle.font = UIFont.systemFont(ofSize: 30, weight: .bold)
         gameTitle.textAlignment = .center
         gameTitle.numberOfLines = 2
@@ -77,15 +65,17 @@ class SingleGameView: UIView {
     lazy var screenshot: UIImageView = {
         let screenshot = UIImageView()
         screenshot.translatesAutoresizingMaskIntoConstraints = false
-        let blur = UIBlurEffect(style: UIBlurEffect.Style.dark)
+        let blur = UIBlurEffect(style: UIBlurEffect.Style.regular)
         let blurView = UIVisualEffectView(effect: blur)
+        blurView.alpha = 0.8
         blurView.frame = screenshot.bounds
         blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         screenshot.addSubview(blurView)
+        screenshot.contentMode = .scaleAspectFill
         return screenshot
     }()
 
-    lazy var criticRatings: UILabel = {
+     var criticRatings: UILabel = {
         let criticRatings = UILabel()
         criticRatings.text = "98"
         criticRatings.textAlignment = .center
@@ -119,13 +109,14 @@ class SingleGameView: UIView {
     }()
 
     lazy var collectionView: CollectionCollectionViewView = {
-        let collecView = CollectionCollectionViewView(frame: CGRect.zero,game: self.game)
+        let collecView = CollectionCollectionViewView(frame: .zero, game: self.game)
         collecView.translatesAutoresizingMaskIntoConstraints = false
         return collecView
     }()
 
      init(frame: CGRect, game: Game) {
         self.game = game
+        self.rating = Int(game.aggregatedRating ?? 00)
         super.init(frame: frame)
         addSubview(screenshot)
         addSubview(gameCover)
@@ -133,6 +124,7 @@ class SingleGameView: UIView {
         addSubview(favoriteButtom)
         addSubview(ratingStack)
         addSubview(collectionView)
+         gameTitle.text = game.name
         addStackSubviews()
         setupImages()
         setupView()
@@ -144,8 +136,16 @@ class SingleGameView: UIView {
     func addStackSubviews() {
 
         ratingStack.addArrangedSubview(criticRatings)
-        rating = 50
         criticRatings.text = String(rating)
+        if self.rating >= 70 {
+            criticRatings.backgroundColor = .green
+        } else if rating > 40 && rating < 70 {
+            criticRatings.backgroundColor = .systemYellow
+        } else if rating < 40 && rating < 0 {
+            criticRatings.backgroundColor = .red
+        } else {
+            criticRatings.backgroundColor = .gray
+        }
         ratingUILabel.text = ratingLabel
         ratingStack.addArrangedSubview(ratingUILabel)
 
@@ -202,7 +202,7 @@ class SingleGameView: UIView {
             
             
             collectionView.topAnchor.constraint(equalTo: ratingStack.bottomAnchor, constant: 10),
-            collectionView.bottomAnchor.constraint(equalTo: collectionView.bottomAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             collectionView.leftAnchor.constraint(equalTo: self.leftAnchor),
             collectionView.rightAnchor.constraint(equalTo: self.rightAnchor)
 //            genreCollectionStack.topAnchor.constraint(equalTo: ratingStack.bottomAnchor, constant: 10),

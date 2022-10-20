@@ -18,11 +18,11 @@ struct Game: Codable {
     var dlcs, externalGames: [Int]?
     var firstReleaseDate, follows: Int?
     var franchises, gameEngines, gameModes: [Int]?
-    var genres: [Genre]
+    var genres: [Genre]?
     var involvedCompanies, keywords: [Int]?
     var name: String?
     var playerPerspectives: [Int]?
-    var platforms: [Platforms]
+    var platforms: [Platforms]?
     var rating: Double?
     var ratingCount: Int?
     var releaseDates: [Int]?

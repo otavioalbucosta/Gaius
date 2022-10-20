@@ -10,7 +10,11 @@ import Foundation
 
 class GamesCollectionViewCell: UICollectionViewCell {
     static let CellID = "GamesCellID"
-    let isOnSearch: Bool = true
+    var isOnSearch: Bool = true {
+        didSet {
+            setupViews()
+        }
+    }
 
     var gameCover: String? {
 
@@ -48,7 +52,7 @@ class GamesCollectionViewCell: UICollectionViewCell {
         return age
     }()
 
-    override init(frame: CGRect) {
+    override init(frame: CGRect ) {
         super.init(frame: frame)
         addSubview(coverImage)
 
@@ -79,17 +83,16 @@ class GamesCollectionViewCell: UICollectionViewCell {
                 title.trailingAnchor.constraint(equalTo: self.trailingAnchor),
                 age.topAnchor.constraint(equalTo: title.bottomAnchor),
                 age.leadingAnchor.constraint(equalTo: coverImage.trailingAnchor, constant: 10),
-                age.trailingAnchor.constraint(equalTo: self.trailingAnchor)
+                age.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             ])
         } else {
             NSLayoutConstraint.activate([
-                coverImage.topAnchor.constraint(equalTo: self.topAnchor),
-                coverImage.leadingAnchor.constraint(equalTo: coverImage.leadingAnchor),
-                coverImage.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-                coverImage.trailingAnchor.constraint(equalTo: coverImage.trailingAnchor),
+                coverImage.topAnchor.constraint(equalTo: coverImage.topAnchor),
+                coverImage.leftAnchor.constraint(equalTo: coverImage.leftAnchor),
+                coverImage.rightAnchor.constraint(equalTo: coverImage.rightAnchor),
                 coverImage.bottomAnchor.constraint(equalTo: coverImage.bottomAnchor),
-                coverImage.heightAnchor.constraint(equalToConstant: 150),
-                coverImage.widthAnchor.constraint(equalToConstant: 120)
+                coverImage.widthAnchor.constraint(equalToConstant: 140),
+                coverImage.heightAnchor.constraint(equalToConstant: 200)
             ])
         }
     }

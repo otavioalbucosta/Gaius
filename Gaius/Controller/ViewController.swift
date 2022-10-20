@@ -29,7 +29,6 @@ class ViewController: UIViewController, UISearchResultsUpdating, UICollectionVie
         gameCollection.dataSource = self
         gameCollection.delegate = self
         setupView()
-        gameCollection.reloadData()
         Task {
             let res = await API.getGamesByPopularity(limit: 50, token: "menf7x6bad06mm51uhwpr8i2fjs1uf")
             self.source = res
