@@ -30,7 +30,7 @@ class ViewController: UIViewController, UISearchResultsUpdating, UICollectionVie
         gameCollection.delegate = self
         setupView()
         Task {
-            let res = await API.getGamesByPopularity(limit: 50, token: "menf7x6bad06mm51uhwpr8i2fjs1uf")
+            let res = await API.getGamesByPopularity(limit: 50)
             self.source = res
             gameCollection.reloadData()
             //            print(res)
@@ -92,7 +92,7 @@ class ViewController: UIViewController, UISearchResultsUpdating, UICollectionVie
         guard let query = searchController.searchBar.text else { return }
         searchTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { [weak self] _ in
             Task {
-                let res = await API.searchGamesByName(limit: 50, token: "menf7x6bad06mm51uhwpr8i2fjs1uf", search: query)
+                let res = await API.searchGamesByName(limit: 50, search: query)
                 self!.source = res
                 DispatchQueue.main.async {
                     self!.gameCollection.reloadData()
@@ -103,7 +103,7 @@ class ViewController: UIViewController, UISearchResultsUpdating, UICollectionVie
 
     func didDismissSearchController(_ searchController: UISearchController) {
         Task {
-            let res = await API.getGamesByPopularity(limit: 50, token: "menf7x6bad06mm51uhwpr8i2fjs1uf")
+            let res = await API.getGamesByPopularity(limit: 50)
             source = res
             DispatchQueue.main.async {
                 self.gameCollection.reloadData()

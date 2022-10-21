@@ -10,7 +10,6 @@
 		290700B428F593DE001D0DF9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290700B328F593DE001D0DF9 /* AppDelegate.swift */; };
 		290700B628F593DE001D0DF9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290700B528F593DE001D0DF9 /* SceneDelegate.swift */; };
 		290700B828F593DE001D0DF9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290700B728F593DE001D0DF9 /* ViewController.swift */; };
-		290700BE28F593DE001D0DF9 /* Gaius.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 290700BC28F593DE001D0DF9 /* Gaius.xcdatamodeld */; };
 		290700C028F593DF001D0DF9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 290700BF28F593DF001D0DF9 /* Assets.xcassets */; };
 		290700C328F593DF001D0DF9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 290700C128F593DF001D0DF9 /* LaunchScreen.storyboard */; };
 		290700CE28F593DF001D0DF9 /* GaiusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290700CD28F593DF001D0DF9 /* GaiusTests.swift */; };
@@ -54,7 +53,6 @@
 		290700B328F593DE001D0DF9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		290700B528F593DE001D0DF9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		290700B728F593DE001D0DF9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		290700BD28F593DE001D0DF9 /* Gaius.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Gaius.xcdatamodel; sourceTree = "<group>"; };
 		290700BF28F593DF001D0DF9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		290700C228F593DF001D0DF9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		290700C428F593DF001D0DF9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -127,6 +125,7 @@
 		290700B228F593DD001D0DF9 /* Gaius */ = {
 			isa = PBXGroup;
 			children = (
+				299FA0992901DCB1009CF608 /* CoreData */,
 				299FA08128FED649009CF608 /* Extensions */,
 				2909B42A28F99013005F077B /* Service */,
 				290700EF28F5ED6B001D0DF9 /* Model */,
@@ -138,7 +137,6 @@
 				290700BF28F593DF001D0DF9 /* Assets.xcassets */,
 				290700C128F593DF001D0DF9 /* LaunchScreen.storyboard */,
 				290700C428F593DF001D0DF9 /* Info.plist */,
-				290700BC28F593DE001D0DF9 /* Gaius.xcdatamodeld */,
 			);
 			path = Gaius;
 			sourceTree = "<group>";
@@ -215,6 +213,13 @@
 				299FA08228FED662009CF608 /* Extensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		299FA0992901DCB1009CF608 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -384,7 +389,6 @@
 				290700B628F593DE001D0DF9 /* SceneDelegate.swift in Sources */,
 				290700EA28F5B928001D0DF9 /* SearchGameCollectionView.swift in Sources */,
 				2909B42C28F99022005F077B /* API.swift in Sources */,
-				290700BE28F593DE001D0DF9 /* Gaius.xcdatamodeld in Sources */,
 				299FA08F28FF25E0009CF608 /* CollectionCollectionViewView.swift in Sources */,
 				299FA08328FED662009CF608 /* Extensions.swift in Sources */,
 			);
@@ -718,19 +722,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		290700BC28F593DE001D0DF9 /* Gaius.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				290700BD28F593DE001D0DF9 /* Gaius.xcdatamodel */,
-			);
-			currentVersion = 290700BD28F593DE001D0DF9 /* Gaius.xcdatamodel */;
-			path = Gaius.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 290700A828F593DD001D0DF9 /* Project object */;
 }

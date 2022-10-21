@@ -17,13 +17,17 @@ class TagCollectionView: UICollectionView {
         super.init(frame: .zero, collectionViewLayout: layout)
         self.register(TagCollectionViewCell.self, forCellWithReuseIdentifier: TagCollectionViewCell.id)
         self.isScrollEnabled = true
+        self.contentInsetAdjustmentBehavior = .always
 
     }
 
     private var layout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+//        layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        layout.estimatedItemSize = CGSize(width: 100, height: 20)
+        print(UICollectionViewFlowLayout.automaticSize)
+
         return layout
     }()
 
@@ -58,7 +62,6 @@ class TagCollectionViewCell: UICollectionViewCell {
             label.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 6),
             label.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -6),
             label.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -3)
-
         ])
     }
 }

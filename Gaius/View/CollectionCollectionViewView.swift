@@ -65,14 +65,13 @@ class CollectionCollectionViewView: UIView, UICollectionViewDataSource, UICollec
         stack.addArrangedSubview(platformsCollectionView)
         return stack
     }()
-    
     lazy var recommendedGamesCollectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
-        
         flowLayout.scrollDirection = .horizontal
-        flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+//        flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        flowLayout.estimatedItemSize = CGSize(width: 120, height: 160)
         let collecView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
-        collecView.register(GamesCollectionViewCell.self, forCellWithReuseIdentifier: "Recommended")
+        collecView.register(GamesCollectionViewCell.self, forCellWithReuseIdentifier: GamesCollectionViewCell.CellID)
         collecView.translatesAutoresizingMaskIntoConstraints = false
         return collecView
     }()
@@ -111,7 +110,7 @@ class CollectionCollectionViewView: UIView, UICollectionViewDataSource, UICollec
         self.genreCollectionView.reloadData()
         self.platformsCollectionView.reloadData()
         Task {
-            let res = await API.searchSimilarGamesByGenres(limit: 10, token: "menf7x6bad06mm51uhwpr8i2fjs1uf", game: game)
+            let res = await API.searchSimilarGamesByGenres(limit: 10, game: game)
             self.similarGamesSource = res
             recommendedGamesCollectionView.reloadData()
         }
@@ -127,11 +126,10 @@ class CollectionCollectionViewView: UIView, UICollectionViewDataSource, UICollec
             genreCollectionStack.topAnchor.constraint(equalTo: self.topAnchor),
             genreCollectionStack.leftAnchor.constraint(equalTo: self.leftAnchor),
             genreCollectionStack.rightAnchor.constraint(equalTo: self.rightAnchor),
-            platformsCollectionStack.topAnchor.constraint(equalTo: genreCollectionStack.bottomAnchor),
-//            platformsCollectionStack.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            platformsCollectionStack.topAnchor.constraint(equalTo: genreCollectionStack.bottomAnchor, constant: 5),
             platformsCollectionStack.leftAnchor.constraint(equalTo: self.leftAnchor),
             platformsCollectionStack.rightAnchor.constraint(equalTo: self.rightAnchor),
-            recommendedGamesCollectionViewStack.topAnchor.constraint(equalTo: platformsCollectionStack.bottomAnchor),
+            recommendedGamesCollectionViewStack.topAnchor.constraint(equalTo: platformsCollectionStack.bottomAnchor, constant: 5),
             recommendedGamesCollectionViewStack.leftAnchor.constraint(equalTo: self.leftAnchor),
             recommendedGamesCollectionViewStack.rightAnchor.constraint(equalTo: self.rightAnchor),
             recommendedGamesCollectionViewStack.bottomAnchor.constraint(equalTo: self.bottomAnchor),
@@ -139,17 +137,15 @@ class CollectionCollectionViewView: UIView, UICollectionViewDataSource, UICollec
             genreCollectionView.widthAnchor.constraint(equalTo: widthAnchor),
             platformsCollectionView.heightAnchor.constraint(equalToConstant: 30),
             platformsCollectionView.widthAnchor.constraint(equalTo: widthAnchor),
-            recommendedGamesCollectionView.heightAnchor.constraint(equalToConstant: 250),
+            recommendedGamesCollectionView.heightAnchor.constraint(equalToConstant: 200),
             recommendedGamesCollectionView.widthAnchor.constraint(equalTo: widthAnchor)
         ])
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == genreCollectionView {
-            print(genreSource.count)
             return genreSource.count
         } else if collectionView == platformsCollectionView{
-            print(platformSource)
             return platformSource.count
         } else {
             return similarGamesSource.count
@@ -172,7 +168,7 @@ class CollectionCollectionViewView: UIView, UICollectionViewDataSource, UICollec
             }
         }
         else if collectionView == recommendedGamesCollectionView {
-            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Recommended", for: indexPath) as? GamesCollectionViewCell {
+            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GamesCollectionViewCell.CellID, for: indexPath) as? GamesCollectionViewCell {
                 if var url = similarGamesSource[indexPath.row].cover?.url{
                     cell.isOnSearch = false
                     url = "https:" + url

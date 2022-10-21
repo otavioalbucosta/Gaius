@@ -65,7 +65,7 @@ class SingleGameView: UIView {
     lazy var screenshot: UIImageView = {
         let screenshot = UIImageView()
         screenshot.translatesAutoresizingMaskIntoConstraints = false
-        let blur = UIBlurEffect(style: UIBlurEffect.Style.regular)
+        let blur = UIBlurEffect(style: UIBlurEffect.Style.systemUltraThinMaterial)
         let blurView = UIVisualEffectView(effect: blur)
         blurView.alpha = 0.8
         blurView.frame = screenshot.bounds

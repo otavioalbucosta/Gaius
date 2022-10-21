@@ -8,17 +8,17 @@
 import Foundation
 
 struct API {
-    let token: String = "menf7x6bad06mm51uhwpr8i2fjs1uf"
-
-    static func getGamesByPopularity(limit: Int, token: String) async -> [Game] {
+    static let token: String = "menf7x6bad06mm51uhwpr8i2fjs1uf"
+    static let url = URL(string: "https://api.igdb.com/v4/games")!
+    static func getGamesByPopularity(limit: Int) async -> [Game] {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
-        let url = URL(string: "https://api.igdb.com/v4/games")!
-        var requestHeader = URLRequest(url: url)
+        decoder.dataDecodingStrategy
+        var requestHeader = URLRequest(url: API.url)
         requestHeader.httpMethod = "POST"
         requestHeader.allHTTPHeaderFields = [
             "Client-ID": "wqi1xygsetlrubofl44v5h30rtdz2y" ,
-            "Authorization": "Bearer \(token)",
+            "Authorization": "Bearer \(API.token)",
             "Content-Type": "text/plain"
         ]
         let body = """
@@ -38,15 +38,14 @@ struct API {
         }
     }
 
-    static func searchGamesByName(limit: Int, token: String, search: String) async -> [Game] {
+    static func searchGamesByName(limit: Int,  search: String) async -> [Game] {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
-        let url = URL(string: "https://api.igdb.com/v4/games")!
-        var requestHeader = URLRequest(url: url)
+        var requestHeader = URLRequest(url: API.url)
         requestHeader.httpMethod = "POST"
         requestHeader.allHTTPHeaderFields = [
             "Client-ID": "wqi1xygsetlrubofl44v5h30rtdz2y" ,
-            "Authorization": "Bearer \(token)",
+            "Authorization": "Bearer \(API.token)",
             "Content-Type": "text/plain"
         ]
         let body = """
@@ -66,16 +65,15 @@ struct API {
         }
     }
     
-    static func searchSimilarGamesByGenres(limit: Int, token: String, game: Game) async -> [Game] {
+    static func searchSimilarGamesByGenres(limit: Int, game: Game) async -> [Game] {
 
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
-        let url = URL(string: "https://api.igdb.com/v4/games")!
-        var requestHeader = URLRequest(url: url)
+        var requestHeader = URLRequest(url: API.url)
         requestHeader.httpMethod = "POST"
         requestHeader.allHTTPHeaderFields = [
             "Client-ID": "wqi1xygsetlrubofl44v5h30rtdz2y" ,
-            "Authorization": "Bearer \(token)",
+            "Authorization": "Bearer \(API.token)",
             "Content-Type": "text/plain"
         ]
         let body = """
