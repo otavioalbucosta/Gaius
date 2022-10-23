@@ -9,9 +9,9 @@ import Foundation
 
 struct Cover: Codable {
     var id: Int?
-    var alphaChannel, animated: Bool?
+//    var alphaChannel, animated: Bool?
     var game, height: Int?
     var imageID, url: String?
     var width: Int?
-    var checksum: String?
+//    var checksum: String?
 }

@@ -21,6 +21,17 @@
 		2909B42628F848B3005F077B /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2909B42528F848B3005F077B /* SearchViewController.swift */; };
 		2909B42C28F99022005F077B /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2909B42B28F99022005F077B /* API.swift */; };
 		2909B42E28F99632005F077B /* Cover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2909B42D28F99632005F077B /* Cover.swift */; };
+		29454CFA2902DEEB00AD62FF /* Gaius.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 29454CF82902DEEB00AD62FF /* Gaius.xcdatamodeld */; };
+		29454D0529058C2200AD62FF /* Platforms+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29454CFB29058C2200AD62FF /* Platforms+CoreDataClass.swift */; };
+		29454D0629058C2200AD62FF /* Platforms+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29454CFC29058C2200AD62FF /* Platforms+CoreDataProperties.swift */; };
+		29454D0729058C2200AD62FF /* Genre+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29454CFD29058C2200AD62FF /* Genre+CoreDataClass.swift */; };
+		29454D0829058C2200AD62FF /* Genre+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29454CFE29058C2200AD62FF /* Genre+CoreDataProperties.swift */; };
+		29454D0929058C2200AD62FF /* Game+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29454CFF29058C2200AD62FF /* Game+CoreDataClass.swift */; };
+		29454D0A29058C2200AD62FF /* Game+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29454D0029058C2200AD62FF /* Game+CoreDataProperties.swift */; };
+		29454D0B29058C2200AD62FF /* Cover+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29454D0129058C2200AD62FF /* Cover+CoreDataClass.swift */; };
+		29454D0C29058C2200AD62FF /* Cover+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29454D0229058C2200AD62FF /* Cover+CoreDataProperties.swift */; };
+		29454D0D29058C2200AD62FF /* Screenshot+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29454D0329058C2200AD62FF /* Screenshot+CoreDataClass.swift */; };
+		29454D0E29058C2200AD62FF /* Screenshot+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29454D0429058C2200AD62FF /* Screenshot+CoreDataProperties.swift */; };
 		299FA07C28FD7F15009CF608 /* SingleGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299FA07B28FD7F15009CF608 /* SingleGameView.swift */; };
 		299FA07E28FD98BB009CF608 /* SingleGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299FA07D28FD98BB009CF608 /* SingleGameViewController.swift */; };
 		299FA08028FED2FD009CF608 /* Screenshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299FA07F28FED2FD009CF608 /* Screenshot.swift */; };
@@ -67,6 +78,17 @@
 		2909B42528F848B3005F077B /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		2909B42B28F99022005F077B /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		2909B42D28F99632005F077B /* Cover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cover.swift; sourceTree = "<group>"; };
+		29454CF92902DEEB00AD62FF /* Gaius.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Gaius.xcdatamodel; sourceTree = "<group>"; };
+		29454CFB29058C2200AD62FF /* Platforms+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Platforms+CoreDataClass.swift"; sourceTree = "<group>"; };
+		29454CFC29058C2200AD62FF /* Platforms+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Platforms+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		29454CFD29058C2200AD62FF /* Genre+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Genre+CoreDataClass.swift"; sourceTree = "<group>"; };
+		29454CFE29058C2200AD62FF /* Genre+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Genre+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		29454CFF29058C2200AD62FF /* Game+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Game+CoreDataClass.swift"; sourceTree = "<group>"; };
+		29454D0029058C2200AD62FF /* Game+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Game+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		29454D0129058C2200AD62FF /* Cover+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cover+CoreDataClass.swift"; sourceTree = "<group>"; };
+		29454D0229058C2200AD62FF /* Cover+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cover+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		29454D0329058C2200AD62FF /* Screenshot+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Screenshot+CoreDataClass.swift"; sourceTree = "<group>"; };
+		29454D0429058C2200AD62FF /* Screenshot+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Screenshot+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		299FA07B28FD7F15009CF608 /* SingleGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleGameView.swift; sourceTree = "<group>"; };
 		299FA07D28FD98BB009CF608 /* SingleGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleGameViewController.swift; sourceTree = "<group>"; };
 		299FA07F28FED2FD009CF608 /* Screenshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screenshot.swift; sourceTree = "<group>"; };
@@ -137,6 +159,7 @@
 				290700BF28F593DF001D0DF9 /* Assets.xcassets */,
 				290700C128F593DF001D0DF9 /* LaunchScreen.storyboard */,
 				290700C428F593DF001D0DF9 /* Info.plist */,
+				29454CF82902DEEB00AD62FF /* Gaius.xcdatamodeld */,
 			);
 			path = Gaius;
 			sourceTree = "<group>";
@@ -218,6 +241,16 @@
 		299FA0992901DCB1009CF608 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				29454CFB29058C2200AD62FF /* Platforms+CoreDataClass.swift */,
+				29454CFC29058C2200AD62FF /* Platforms+CoreDataProperties.swift */,
+				29454CFD29058C2200AD62FF /* Genre+CoreDataClass.swift */,
+				29454CFE29058C2200AD62FF /* Genre+CoreDataProperties.swift */,
+				29454CFF29058C2200AD62FF /* Game+CoreDataClass.swift */,
+				29454D0029058C2200AD62FF /* Game+CoreDataProperties.swift */,
+				29454D0129058C2200AD62FF /* Cover+CoreDataClass.swift */,
+				29454D0229058C2200AD62FF /* Cover+CoreDataProperties.swift */,
+				29454D0329058C2200AD62FF /* Screenshot+CoreDataClass.swift */,
+				29454D0429058C2200AD62FF /* Screenshot+CoreDataProperties.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -374,21 +407,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29454D0929058C2200AD62FF /* Game+CoreDataClass.swift in Sources */,
+				29454D0C29058C2200AD62FF /* Cover+CoreDataProperties.swift in Sources */,
 				299FA07E28FD98BB009CF608 /* SingleGameViewController.swift in Sources */,
+				29454D0529058C2200AD62FF /* Platforms+CoreDataClass.swift in Sources */,
 				290700E828F5B398001D0DF9 /* GamesCollectionViewCell.swift in Sources */,
 				299FA09128FF3C8A009CF608 /* Platforms.swift in Sources */,
+				29454D0A29058C2200AD62FF /* Game+CoreDataProperties.swift in Sources */,
 				299FA08028FED2FD009CF608 /* Screenshot.swift in Sources */,
 				299FA07C28FD7F15009CF608 /* SingleGameView.swift in Sources */,
+				29454CFA2902DEEB00AD62FF /* Gaius.xcdatamodeld in Sources */,
+				29454D0B29058C2200AD62FF /* Cover+CoreDataClass.swift in Sources */,
+				29454D0E29058C2200AD62FF /* Screenshot+CoreDataProperties.swift in Sources */,
 				290700B828F593DE001D0DF9 /* ViewController.swift in Sources */,
 				299FA08B28FEE1E0009CF608 /* TagCollectionView.swift in Sources */,
 				290700F128F5ED82001D0DF9 /* Game.swift in Sources */,
 				2909B42E28F99632005F077B /* Cover.swift in Sources */,
+				29454D0729058C2200AD62FF /* Genre+CoreDataClass.swift in Sources */,
 				2909B42628F848B3005F077B /* SearchViewController.swift in Sources */,
 				290700B428F593DE001D0DF9 /* AppDelegate.swift in Sources */,
 				299FA08728FED97D009CF608 /* Genre.swift in Sources */,
 				290700B628F593DE001D0DF9 /* SceneDelegate.swift in Sources */,
+				29454D0D29058C2200AD62FF /* Screenshot+CoreDataClass.swift in Sources */,
 				290700EA28F5B928001D0DF9 /* SearchGameCollectionView.swift in Sources */,
+				29454D0629058C2200AD62FF /* Platforms+CoreDataProperties.swift in Sources */,
 				2909B42C28F99022005F077B /* API.swift in Sources */,
+				29454D0829058C2200AD62FF /* Genre+CoreDataProperties.swift in Sources */,
 				299FA08F28FF25E0009CF608 /* CollectionCollectionViewView.swift in Sources */,
 				299FA08328FED662009CF608 /* Extensions.swift in Sources */,
 			);
@@ -722,6 +766,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		29454CF82902DEEB00AD62FF /* Gaius.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				29454CF92902DEEB00AD62FF /* Gaius.xcdatamodel */,
+			);
+			currentVersion = 29454CF92902DEEB00AD62FF /* Gaius.xcdatamodel */;
+			path = Gaius.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 290700A828F593DD001D0DF9 /* Project object */;
 }
