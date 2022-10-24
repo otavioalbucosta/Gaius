@@ -11,7 +11,6 @@ class CollectionCollectionViewView: UIView, UICollectionViewDelegateFlowLayout {
 
     let game: Game
 
-
     lazy var genreCollectionView: TagCollectionView = {
         let collectionView = TagCollectionView()
         collectionView.isScrollEnabled = true
@@ -73,7 +72,7 @@ class CollectionCollectionViewView: UIView, UICollectionViewDelegateFlowLayout {
         collecView.translatesAutoresizingMaskIntoConstraints = false
         return collecView
     }()
-    
+
     lazy var recommendedGamesCollectionViewStack: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -112,7 +111,8 @@ class CollectionCollectionViewView: UIView, UICollectionViewDelegateFlowLayout {
             platformsCollectionStack.topAnchor.constraint(equalTo: genreCollectionStack.bottomAnchor, constant: 5),
             platformsCollectionStack.leftAnchor.constraint(equalTo: self.leftAnchor),
             platformsCollectionStack.rightAnchor.constraint(equalTo: self.rightAnchor),
-            recommendedGamesCollectionViewStack.topAnchor.constraint(equalTo: platformsCollectionStack.bottomAnchor, constant: 5),
+            recommendedGamesCollectionViewStack.topAnchor.constraint(
+                equalTo: platformsCollectionStack.bottomAnchor, constant: 5),
             recommendedGamesCollectionViewStack.leftAnchor.constraint(equalTo: self.leftAnchor),
             recommendedGamesCollectionViewStack.rightAnchor.constraint(equalTo: self.rightAnchor),
             recommendedGamesCollectionViewStack.bottomAnchor.constraint(equalTo: self.bottomAnchor),
@@ -124,11 +124,5 @@ class CollectionCollectionViewView: UIView, UICollectionViewDelegateFlowLayout {
             recommendedGamesCollectionView.widthAnchor.constraint(equalTo: widthAnchor)
         ])
     }
-
-
-
-
-
-
 
 }

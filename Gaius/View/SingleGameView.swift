@@ -21,11 +21,10 @@ class SingleGameView: UIView {
             ratingUILabel.textColor = .yellow
             return "Good"
 
-        }else if rating < 40 && rating > 0{
+        } else if rating < 40 && rating > 0 {
             ratingUILabel.textColor = .red
             return "Bad"
-        }
-        else {
+        } else {
             ratingUILabel.textColor = .gray
             return "" }
     }
@@ -198,8 +197,7 @@ class SingleGameView: UIView {
             favoriteButtom.rightAnchor.constraint(equalTo: gameCover.rightAnchor),
             favoriteButtom.bottomAnchor.constraint(equalTo: favoriteButtom.bottomAnchor),
             favoriteButtom.heightAnchor.constraint(equalToConstant: 35),
-            
-            
+
             collectionView.topAnchor.constraint(equalTo: ratingStack.bottomAnchor, constant: 10),
             collectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             collectionView.leftAnchor.constraint(equalTo: self.leftAnchor),

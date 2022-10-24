@@ -24,17 +24,16 @@ final class GaiusTests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
-    
+
     func testAPISearch() async throws {
             let res = await API.getGamesByPopularity(limit: 50)
             XCTAssertNotNil(res)
-
 
     }
     func testAPILink() throws {
         let mock = URL(string: "https://api.igdb.com/v4/games")!
         XCTAssertEqual(mock, API.url)
-        
+
     }
-    
+
 }

@@ -13,7 +13,6 @@ struct API {
     static func getGamesByPopularity(limit: Int) async -> [Game] {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
-        decoder.dataDecodingStrategy
         var requestHeader = URLRequest(url: API.url)
         requestHeader.httpMethod = "POST"
         requestHeader.allHTTPHeaderFields = [
@@ -38,7 +37,7 @@ struct API {
         }
     }
 
-    static func searchGamesByName(limit: Int,  search: String) async -> [Game] {
+    static func searchGamesByName(limit: Int, search: String) async -> [Game] {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         var requestHeader = URLRequest(url: API.url)
@@ -50,13 +49,14 @@ struct API {
         ]
         let body = """
         fields *, cover.*, screenshots.*, genres.*, platforms.*;
-        where name ~ *"\(search)"* & category = (0,1,8,9,10) & version_parent = null & first_release_date != null & follows != null & genres != null & platforms != null;
+        where name ~ *"\(search)"* & category = (0,1,8,9,10) & version_parent = null
+        & first_release_date != null & follows != null & genres != null & platforms != null;
         sort follows desc;
         limit \(limit);
         """
         requestHeader.httpBody = body.data(using: .utf8, allowLossyConversion: false)
         do {
-            let (data, result) = try await URLSession.shared.data(for: requestHeader)
+            let (data, _) = try await URLSession.shared.data(for: requestHeader)
             let gameList = try decoder.decode([Game].self, from: data)
             return gameList
         } catch {
@@ -64,7 +64,7 @@ struct API {
             return []
         }
     }
-    
+
     static func searchSimilarGamesByGenres(limit: Int, game: Game) async -> [Game] {
 
         let decoder = JSONDecoder()
@@ -78,13 +78,14 @@ struct API {
         ]
         let body = """
         fields *, cover.*, screenshots.*, platforms.*, genres.*;
-        where genres = [\(game.genres!.map{String($0.id!)}.joined(separator: ","))] & category = (0,1,9,8,10) & version_parent = null & first_release_date != null & follows != null;
+        where genres = [\(game.genres!.map {String($0.id!)}.joined(separator: ","))]
+        & category = (0,1,9,8,10) & version_parent = null & first_release_date != null & follows != null;
         sort follows desc;
         limit \(limit);
         """
         requestHeader.httpBody = body.data(using: .utf8, allowLossyConversion: false)
         do {
-            let (data, result) = try await URLSession.shared.data(for: requestHeader)
+            let (data, _) = try await URLSession.shared.data(for: requestHeader)
             let gameList = try decoder.decode([Game].self, from: data)
             return gameList
         } catch {

@@ -9,14 +9,12 @@ import UIKit
 
 class SingleGameViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 
-    
     var game: Game
     var contentView: SingleGameView
     var genreSource = [Genre]()
     var platformSource = [Platforms]()
     var similarGamesSource = [Game]()
-    
-    
+
     init(game: Game) {
         self.game = game
         self.contentView = SingleGameView(frame: CGRect.zero, game: game)
@@ -91,10 +89,10 @@ class SingleGameViewController: UIViewController, UICollectionViewDataSource, UI
                 cell.label.text = platformSource[indexPath.row].name
                 return cell
             }
-        }
-            else if collectionView == contentView.collectionView.recommendedGamesCollectionView {
-            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GamesCollectionViewCell.CellID, for: indexPath) as? GamesCollectionViewCell {
-                if var url = similarGamesSource[indexPath.row].cover?.url{
+        } else if collectionView == contentView.collectionView.recommendedGamesCollectionView {
+            if let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: GamesCollectionViewCell.CellID, for: indexPath) as? GamesCollectionViewCell {
+                if var url = similarGamesSource[indexPath.row].cover?.url {
                     cell.isOnSearch = false
                     url = "https:" + url
                     url = url.replacingOccurrences(of: "thumb", with: "720p")
@@ -109,18 +107,18 @@ class SingleGameViewController: UIViewController, UICollectionViewDataSource, UI
         cell.backgroundColor = .red
         return cell
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == contentView.collectionView.recommendedGamesCollectionView {
             let singleGameVC = SingleGameViewController(game: similarGamesSource[indexPath.row])
             self.show(singleGameVC, sender: self)
         }
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == contentView.collectionView.genreCollectionView {
             return genreSource.count
-        } else if collectionView == contentView.collectionView.platformsCollectionView{
+        } else if collectionView == contentView.collectionView.platformsCollectionView {
             return platformSource.count
         } else {
             return similarGamesSource.count

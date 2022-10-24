@@ -22,7 +22,7 @@ struct Game: Codable {
     var platforms: [Platforms]?
     var rating: Double?
     var screenshots: [Screenshot]?
-    var slug, storyline, summary: String?
+//    var slug, storyline, summary: String?
     var tags, themes: [Int]?
     var totalRating: Double?
     var videos, websites: [Int]?

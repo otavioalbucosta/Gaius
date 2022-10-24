@@ -83,7 +83,7 @@ class GamesCollectionViewCell: UICollectionViewCell {
                 title.trailingAnchor.constraint(equalTo: self.trailingAnchor),
                 age.topAnchor.constraint(equalTo: title.bottomAnchor),
                 age.leadingAnchor.constraint(equalTo: coverImage.trailingAnchor, constant: 10),
-                age.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+                age.trailingAnchor.constraint(equalTo: self.trailingAnchor)
             ])
         } else {
             NSLayoutConstraint.activate([
