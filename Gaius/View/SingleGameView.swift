@@ -25,7 +25,6 @@ class SingleGameView: UIView {
             ratingUILabel.textColor = .red
             return "Bad"
         }
-        
         else {
             ratingUILabel.textColor = .gray
             return "" }

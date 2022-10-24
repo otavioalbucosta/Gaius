@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21279" systemVersion="21G115" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Cover" representedClassName="Cover" syncable="YES" codeGenerationType="class">
+    <entity name="Covers" representedClassName="Covers" syncable="YES">
         <attribute name="height" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="imageID" optional="YES" attributeType="String"/>
         <attribute name="url" optional="YES" attributeType="String"/>
         <attribute name="width" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
-    <entity name="Game" representedClassName="Game" syncable="YES" codeGenerationType="class">
+    <entity name="Games" representedClassName="Games" syncable="YES">
         <attribute name="aggregatedRatin" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="category" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="firstReleaseDate" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
@@ -23,24 +23,24 @@
         <attribute name="totalRating" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="videos" optional="YES" attributeType="Transformable"/>
         <attribute name="websites" optional="YES" attributeType="Transformable"/>
-        <relationship name="cover" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Cover"/>
-        <relationship name="genre" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Genre"/>
+        <relationship name="cover" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Covers"/>
+        <relationship name="genre" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Genres"/>
         <relationship name="platform" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Platforms"/>
-        <relationship name="screenshot" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Screenshot"/>
+        <relationship name="screenshot" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Screenshots"/>
     </entity>
-    <entity name="Genre" representedClassName="Genre" syncable="YES" codeGenerationType="class">
+    <entity name="Genres" representedClassName="Genres" syncable="YES">
         <attribute name="createdAt" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="slug" optional="YES" attributeType="String"/>
         <attribute name="url" optional="YES" attributeType="String"/>
     </entity>
-    <entity name="Platforms" representedClassName="Platforms" syncable="YES" codeGenerationType="class">
+    <entity name="Platforms" representedClassName="Platforms" syncable="YES">
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="slug" optional="YES" attributeType="String"/>
     </entity>
-    <entity name="Screenshot" representedClassName="Screenshot" syncable="YES" codeGenerationType="class">
+    <entity name="Screenshots" representedClassName="Screenshots" syncable="YES">
         <attribute name="game" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="height" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>

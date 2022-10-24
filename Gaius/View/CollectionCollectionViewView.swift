@@ -7,12 +7,10 @@
 
 import UIKit
 
-class CollectionCollectionViewView: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class CollectionCollectionViewView: UIView, UICollectionViewDelegateFlowLayout {
 
     let game: Game
-    var genreSource = [Genre]()
-    var platformSource = [Platforms]()
-    var similarGamesSource = [Game]()
+
 
     lazy var genreCollectionView: TagCollectionView = {
         let collectionView = TagCollectionView()
@@ -98,22 +96,7 @@ class CollectionCollectionViewView: UIView, UICollectionViewDataSource, UICollec
         addSubview(genreCollectionStack)
         addSubview(platformsCollectionStack)
         addSubview(recommendedGamesCollectionViewStack)
-        self.genreSource = game.genres ?? []
-        self.platformSource = game.platforms ?? []
-        genreCollectionView.dataSource = self
-        genreCollectionView.delegate = self
-        platformsCollectionView.delegate = self
-        platformsCollectionView.dataSource = self
-        recommendedGamesCollectionView.dataSource = self
-        recommendedGamesCollectionView.delegate = self
         setupViews()
-        self.genreCollectionView.reloadData()
-        self.platformsCollectionView.reloadData()
-        Task {
-            let res = await API.searchSimilarGamesByGenres(limit: 10, game: game)
-            self.similarGamesSource = res
-            recommendedGamesCollectionView.reloadData()
-        }
 
     }
 
@@ -142,48 +125,9 @@ class CollectionCollectionViewView: UIView, UICollectionViewDataSource, UICollec
         ])
     }
 
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == genreCollectionView {
-            return genreSource.count
-        } else if collectionView == platformsCollectionView{
-            return platformSource.count
-        } else {
-            return similarGamesSource.count
-        }
-    }
 
-    func collectionView(
-        _ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView == genreCollectionView {
-            if let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: TagCollectionViewCell.id, for: indexPath) as? TagCollectionViewCell {
-                cell.label.text = genreSource[indexPath.row].name
-                return cell
-            }
-        } else if collectionView == platformsCollectionView {
-            if let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: TagCollectionViewCell.id, for: indexPath) as? TagCollectionViewCell {
-                cell.label.text = platformSource[indexPath.row].name
-                return cell
-            }
-        }
-        else if collectionView == recommendedGamesCollectionView {
-            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GamesCollectionViewCell.CellID, for: indexPath) as? GamesCollectionViewCell {
-                if var url = similarGamesSource[indexPath.row].cover?.url{
-                    cell.isOnSearch = false
-                    url = "https:" + url
-                    url = url.replacingOccurrences(of: "thumb", with: "720p")
-                    cell.gameCover = url
 
-                    return cell
-                }
 
-            }
-        }
-        let cell = UICollectionViewCell()
-        cell.backgroundColor = .red
-        return cell
-    }
 
 
 
